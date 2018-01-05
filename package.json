@@ -1,0 +1,45 @@
+{
+    "name": "@financial-times/tooling-logger",
+    "version": "1.0.0",
+    "description": "Logger used by the tooling team. Logs in JSON format using pino",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest",
+        "lint": "eslint --cache --fix .",
+        "precommit": "lint-staged"
+    },
+    "lint-staged": {
+        "*.{js}": [
+            "eslint --cache --fix",
+            "git add"
+        ]
+    },
+    "engines": {
+        "node": ">= 6.10.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Financial-Times/tooling-logger.git"
+    },
+    "author": "Charlie Briggs <charlie.briggs@ft.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Financial-Times/tooling-logger/issues"
+    },
+    "homepage": "https://github.com/Financial-Times/tooling-logger#readme",
+    "dependencies": {
+        "pino": "~4.10.3"
+    },
+    "devDependencies": {
+        "@financial-times/eslint-config-de-tooling": "^2.0.3",
+        "eslint": "^4.14.0",
+        "eslint-config-prettier": "^2.9.0",
+        "eslint-plugin-import": "^2.8.0",
+        "eslint-plugin-jest": "^21.5.0",
+        "eslint-plugin-prettier": "^2.4.0",
+        "husky": "^0.14.3",
+        "jest": "^22.0.4",
+        "lint-staged": "^6.0.0",
+        "prettier": "^1.9.2"
+    }
+}
