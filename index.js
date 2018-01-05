@@ -3,21 +3,25 @@
 const pino = require('pino')
 
 const isProduction = process.env.NODE_ENV === 'production'
+const level = process.env.CONSOLE_LOG_LEVEL
 
-let pretty
+let prettyPrint
 
 if (!isProduction) {
-    pretty = pino.pretty({
-        forceColor: true,
-    })
+    prettyPrint = pino.pretty({ forceColor: true })
 
-    pretty.pipe(process.stdout)
+    prettyPrint.pipe(process.stdout)
 }
 
 const logger = pino({
-    name: 'app',
-    safe: true,
-    prettyPrint: pretty,
+    prettyPrint,
+    level,
 })
 
-module.exports = logger
+const augmentedLogger = isProduction
+    ? logger.child({
+          sourcetype: '_json',
+      })
+    : logger
+
+module.exports = augmentedLogger

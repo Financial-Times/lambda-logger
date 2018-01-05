@@ -2,6 +2,11 @@
 
 Logger used by the tooling team. Logs in JSON format using [pino](https://github.com/pinojs/pino).
 
-Pretty printing is enabled when `NODE_ENV !== 'production'`.
+The API is identical to that of pino with the following exceptions:
 
-The API is identical to that of pino.
+`sourcetype: _json` is added to logs in production for Splunk compatibility.
+
+## Configuration
+
+* Pretty printing is enabled when `NODE_ENV !== 'production'`.
+* `CONSOLE_LOG_LEVEL` determines the level to log at (pinto `level` option).
