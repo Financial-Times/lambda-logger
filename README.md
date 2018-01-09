@@ -6,9 +6,11 @@ This was created to provide a simple logger, compatible with lambda, which outpu
 
 The API is identical to that of pino with the following exceptions:
 
-`sourcetype: _json` is added to logs in production for Splunk compatibility.
+* The property `sourcetype: _json` is added to logs in production for Splunk compatibility.
+* Defaults to ISO timestamp logging for splunk compatiblity. At the time of writing this incurs a 25% pino performance penalty
 
 ## Configuration
 
-* Pretty printing is enabled when `NODE_ENV !== 'production'`.
-* `CONSOLE_LOG_LEVEL` determines the level to log at (pinto `level` option).
+* `NODE_ENV` - pretty printing is enabled when `NODE_ENV !== 'production'`.
+* `CONSOLE_LOG_LEVEL` - determines the level to log at (pinto `level` option).
+* `SYSTEM_CODE` - adds the `systemCode` property to the output

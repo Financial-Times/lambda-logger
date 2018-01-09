@@ -10,6 +10,12 @@ references:
   workspace_root: &workspace_root
     ~/project
 
+  persist_workspace: &persist_workspace
+    persist_to_workspace:
+      root: ~/project
+      paths:
+        - tooling-logger
+
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
@@ -40,10 +46,7 @@ jobs:
           command: npm install
 
       - *cache_node_modules
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - tooling-logger
+      - *persist_workspace
 
   test:
     <<: *container_config
@@ -54,15 +57,20 @@ jobs:
           name: Run linter
           command: npm run lint
 
+      - run:
+          name: Run tests
+          command: npm test
+
+      - run:
+          name: Run build
+          command: npm run build
+
+      - *persist_workspace
+
   release:
     <<: *container_config
     steps:
       - *attach_workspace
-
-
-      - run:
-          name: Prune devDependencies
-          command: npm prune --production
 
       - deploy:
           command: |
