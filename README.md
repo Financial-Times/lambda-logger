@@ -1,4 +1,4 @@
-# tooling-logger
+# tooling-logger [![Circle CI](https://circleci.com/gh/Financial-Times/tooling-logger.svg?style=svg)](https://circleci.com/gh/Financial-Times/tooling-logger)
 
 Logger used by the tooling team. Logs in JSON format using [pino](https://github.com/pinojs/pino).
 
