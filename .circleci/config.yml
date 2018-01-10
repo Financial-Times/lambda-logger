@@ -2,11 +2,6 @@ version: 2
 
 references:
 
-  container_config_argon: &container_config_argon
-    working_directory: ~/project/lambda-logger
-    docker:
-      - image: circleci/node:argon
-
   container_config_boron: &container_config_boron
     working_directory: ~/project/lambda-logger
     docker:
@@ -57,19 +52,6 @@ jobs:
 
       - *cache_node_modules
       - *persist_workspace
-
-  test_argon:
-    <<: *container_config_argon
-    steps:
-      - *attach_workspace
-
-      - run:
-          name: Run tests
-          command: npm test
-
-      - run:
-          name: Run build
-          command: npm run build
 
   test_boron:
     <<: *container_config_boron
@@ -122,12 +104,6 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - test_argon:
-          requires:
-            - install
-          filters:
-            tags:
-              only: /.*/
       - test_boron:
           requires:
             - install
@@ -142,7 +118,6 @@ workflows:
               only: /.*/
       - release:
           requires:
-            - test_argon
             - test_boron
             - test_carbon
           filters:
