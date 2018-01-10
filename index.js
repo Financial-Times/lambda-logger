@@ -4,7 +4,11 @@ const pino = require('pino');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const level = process.env.CONSOLE_LOG_LEVEL || 'trace';
-const systemCode = process.env.SYSTEM_CODE;
+const metadata = {
+    sourceType: isProduction ? '_json' : undefined,
+    systemCode: process.env.SYSTEM_CODE,
+    environment: process.env.ENVIRONMENT || process.env.STAGE,
+};
 
 let prettyPrint;
 
@@ -22,11 +26,15 @@ const logger = pino({
     slowtime: true,
 });
 
-const augmentedLogger = isProduction
-    ? logger.child({
-          systemCode,
-          sourcetype: '_json',
-      })
-    : logger;
+const getLoggerWithMetadata = () => {
+    const definedMetadata = Object.keys(metadata)
+        .filter(key => typeof metadata[key] !== 'undefined')
+        .reduce(
+            (result, key) =>
+                Object.assign({}, result, { [key]: metadata[key] }),
+            {}
+        );
+    return logger.child(definedMetadata);
+};
 
-module.exports = augmentedLogger;
+module.exports = getLoggerWithMetadata();

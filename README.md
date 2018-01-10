@@ -1,4 +1,6 @@
-# tooling-logger [![Circle CI](https://circleci.com/gh/Financial-Times/tooling-logger.svg?style=svg)](https://circleci.com/gh/Financial-Times/tooling-logger)
+[![CircleCI](https://circleci.com/gh/Financial-Times/tooling-logger.svg?style=svg&circle-token=95d28799bf7519d6c9628cb0cdb053f08ff9ff30)](https://circleci.com/gh/Financial-Times/tooling-logger)
+
+# tooling-logger
 
 Logger used by the tooling team. Logs in JSON format using [pino](https://github.com/pinojs/pino).
 
@@ -13,4 +15,5 @@ The API is identical to that of pino with the following exceptions:
 
 * `NODE_ENV` - pretty printing is enabled when `NODE_ENV !== 'production'`.
 * `CONSOLE_LOG_LEVEL` - determines the level to log at (pinto `level` option).
-* `SYSTEM_CODE` - adds the `systemCode` property to the output
+* `SYSTEM_CODE` - adds the `systemCode` property to every log.
+* `ENVIRONMENT|STAGE` - adds the `environment` property to every log. `STAGE` is used as a fallback due to it's default definition in the [serverless](https://serverless.com) framework.
