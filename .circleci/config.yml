@@ -2,10 +2,20 @@ version: 2
 
 references:
 
-  container_config: &container_config
+  container_config_argon: &container_config_argon
+    working_directory: ~/project/lambda-logger
+    docker:
+      - image: circleci/node:4.3.2
+
+  container_config_boron: &container_config_boron
     working_directory: ~/project/lambda-logger
     docker:
       - image: circleci/node:6.10.3
+
+  container_config_carbon: &container_config_carbon
+    working_directory: ~/project/lambda-logger
+    docker:
+      - image: circleci/node:carbon
 
   workspace_root: &workspace_root
     ~/project
@@ -36,7 +46,7 @@ references:
 
 jobs:
   install:
-    <<: *container_config
+    <<: *container_config_carbon
     steps:
       - checkout
       - *restore_node_modules
@@ -48,8 +58,21 @@ jobs:
       - *cache_node_modules
       - *persist_workspace
 
-  test:
-    <<: *container_config
+  test:argon:
+    <<: *container_config_argon
+    steps:
+      - *attach_workspace
+
+      - run:
+          name: Run tests
+          command: npm test
+
+      - run:
+          name: Run build
+          command: npm run build
+
+  test:boron:
+    <<: *container_config_boron
     steps:
       - *attach_workspace
 
@@ -59,7 +82,7 @@ jobs:
 
       - run:
           name: Run tests
-          command: npm run coverage | npm run coverage:submit
+          command: npm run coverage && npm run coverage:submit
 
       - run:
           name: Run build
@@ -67,8 +90,20 @@ jobs:
 
       - *persist_workspace
 
+  test:carbon:
+    <<: *container_config_carbon
+    steps:
+
+      - run:
+          name: Run tests
+          command: npm test
+
+      - run:
+          name: Run build
+          command: npm run build
+
   release:
-    <<: *container_config
+    <<: *container_config_carbon
     steps:
       - *attach_workspace
 
@@ -86,7 +121,19 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - test:
+      - test_argon:
+          requires:
+            - install
+          filters:
+            tags:
+              only: /.*/
+      - test_boron:
+          requires:
+            - install
+          filters:
+            tags:
+              only: /.*/
+      - test_carbon:
           requires:
             - install
           filters:
@@ -94,7 +141,9 @@ workflows:
               only: /.*/
       - release:
           requires:
-            - test
+            - test_argon
+            - test_boron
+            - test_carbon
           filters:
             branches:
               ignore: /.*/
