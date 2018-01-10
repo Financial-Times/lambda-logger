@@ -3,7 +3,7 @@ version: 2
 references:
 
   container_config: &container_config
-    working_directory: ~/project/tooling-logger
+    working_directory: ~/project/lambda-logger
     docker:
       - image: circleci/node:6.10.3
 
@@ -14,7 +14,7 @@ references:
     persist_to_workspace:
       root: ~/project
       paths:
-        - tooling-logger
+        - lambda-logger
 
   attach_workspace: &attach_workspace
     attach_workspace:

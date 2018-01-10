@@ -11,7 +11,21 @@ This was created to provide a simple logger, compatible with lambda, which outpu
 The logger's API is identical to that of pino with the following exceptions:
 
 * The property `sourcetype: _json` is added to logs in production for Splunk compatibility.
-* Defaults to ISO timestamp logging for splunk compatiblity. At the time of writing this incurs a 25% pino performance penalty
+* Lambda related environment variables are added by default:
+  * AWS_EXECUTION_ENV,
+  * AWS_LAMBDA_FUNCTION_NAME,
+  * AWS_LAMBDA_FUNCTION_MEMORY_SIZE,
+  * AWS_LAMBDA_FUNCTION_VERSION
+* Defaults to ISO timestamp logging for splunk compatiblity. At the time of writing this incurs a 25% pino performance penalty.
+
+### Pino properties
+
+Pino adds the following properties to logs by default:
+
+* `level` - the log level in integer form. Refer to the `pino` documentation to translate this.
+* `v` - the pino logger API version.
+* `hostname` - the hostname the process is running on.
+* `pid` - the process PID.
 
 ## Configuration
 
