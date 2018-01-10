@@ -1,8 +1,7 @@
 {
     "name": "@financial-times/tooling-logger",
     "version": "1.0.0",
-    "description":
-        "Logger used by the tooling team. Logs in JSON format using pino",
+    "description": "Logger used by the tooling team. Logs in JSON format using pino",
     "main": "dist/@financial-times/tooling-logger.js",
     "browser": "dist/@financial-times/tooling-logger.umd.js",
     "module": "dist/@financial-times/tooling-logger.m.js",
@@ -14,7 +13,10 @@
         "precommit": "lint-staged"
     },
     "lint-staged": {
-        "*.js": ["eslint --cache --fix", "git add"]
+        "*.js": [
+            "eslint --cache --fix",
+            "git add"
+        ]
     },
     "engines": {
         "node": ">= 6.10.0"
@@ -34,6 +36,9 @@
     },
     "devDependencies": {
         "@financial-times/eslint-config-de-tooling": "^2.0.3",
+        "babel-core": "^6.26.0",
+        "babel-jest": "^22.0.4",
+        "babel-preset-env": "^1.6.1",
         "eslint": "^4.14.0",
         "eslint-config-prettier": "^2.9.0",
         "eslint-plugin-import": "^2.8.0",
