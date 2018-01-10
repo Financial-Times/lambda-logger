@@ -5,7 +5,7 @@ references:
   container_config_argon: &container_config_argon
     working_directory: ~/project/lambda-logger
     docker:
-      - image: circleci/node:4.3.2
+      - image: circleci/node:argon
 
   container_config_boron: &container_config_boron
     working_directory: ~/project/lambda-logger
@@ -93,6 +93,7 @@ jobs:
   test_carbon:
     <<: *container_config_carbon
     steps:
+      - *attach_workspace
 
       - run:
           name: Run tests
