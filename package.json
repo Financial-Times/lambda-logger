@@ -14,7 +14,10 @@
         "precommit": "lint-staged"
     },
     "lint-staged": {
-        "*.js": ["eslint --cache --fix", "git add"]
+        "*.js": [
+            "eslint --cache --fix",
+            "git add"
+        ]
     },
     "engines": {
         "node": ">= 6.10.0"
