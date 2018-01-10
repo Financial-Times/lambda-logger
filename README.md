@@ -4,7 +4,7 @@ Logger useful for AWS lambda applications, particularly those which are aggregat
 
 This was created to provide a simple logger, compatible with lambda, which outputs in a JSON format ([n-logger](https://github.com/Financial-Times/n-logger)) was previously used but didn't handle nested JSON fields or provide a JSON option).
 
-[![CircleCI](https://circleci.com/gh/Financial-Times/tooling-logger.svg?style=svg&circle-token=95d28799bf7519d6c9628cb0cdb053f08ff9ff30)](https://circleci.com/gh/Financial-Times/tooling-logger)
+[![CircleCI](https://circleci.com/gh/Financial-Times/lambda-logger.svg?style=svg&circle-token=95d28799bf7519d6c9628cb0cdb053f08ff9ff30)](https://circleci.com/gh/Financial-Times/lambda-logger) [![Coverage Status](https://coveralls.io/repos/github/Financial-Times/lambda-logger/badge.svg?branch=master)](https://coveralls.io/github/Financial-Times/lambda-logger?branch=master)
 
 ## API
 
