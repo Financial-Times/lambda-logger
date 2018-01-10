@@ -1,6 +1,4 @@
-'use strict';
-
-const pino = require('pino');
+import pino from 'pino';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const level = process.env.CONSOLE_LOG_LEVEL || 'trace';
@@ -37,4 +35,4 @@ const getLoggerWithMetadata = () => {
     return logger.child(definedMetadata);
 };
 
-module.exports = getLoggerWithMetadata();
+export default getLoggerWithMetadata();

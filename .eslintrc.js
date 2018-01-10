@@ -4,4 +4,7 @@ module.exports = {
     rules: {
         'prettier/prettier': 'error',
     },
+    parserOptions: {
+        sourceType: 'module',
+    },
 };

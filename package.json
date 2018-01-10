@@ -5,9 +5,9 @@
         "Logger used by the tooling team. Logs in JSON format using pino",
     "main": "dist/@financial-times/tooling-logger.js",
     "browser": "dist/@financial-times/tooling-logger.umd.js",
-    "esm": "dist/@financial-times/tooling-logger.m.js",
+    "module": "dist/@financial-times/tooling-logger.m.js",
     "scripts": {
-        "build": "microbundle -o dist",
+        "build": "microbundle -i index.js -o dist",
         "watch": "npm run build -- watch",
         "test": "jest",
         "lint": "eslint --cache --fix .",
