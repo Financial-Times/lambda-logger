@@ -58,7 +58,7 @@ jobs:
       - *cache_node_modules
       - *persist_workspace
 
-  test:argon:
+  test_argon:
     <<: *container_config_argon
     steps:
       - *attach_workspace
@@ -71,7 +71,7 @@ jobs:
           name: Run build
           command: npm run build
 
-  test:boron:
+  test_boron:
     <<: *container_config_boron
     steps:
       - *attach_workspace
@@ -90,7 +90,7 @@ jobs:
 
       - *persist_workspace
 
-  test:carbon:
+  test_carbon:
     <<: *container_config_carbon
     steps:
 
