@@ -1,8 +1,7 @@
 {
     "name": "@financial-times/lambda-logger",
     "version": "1.0.0",
-    "description":
-        "Logger used by the lambda team. Logs in JSON format using pino",
+    "description": "Logger used by the lambda team. Logs in JSON format using pino",
     "main": "dist/@financial-times/lambda-logger.js",
     "browser": "dist/@financial-times/lambda-logger.umd.js",
     "module": "dist/@financial-times/lambda-logger.m.js",
@@ -16,7 +15,10 @@
         "precommit": "lint-staged"
     },
     "lint-staged": {
-        "*.js": ["eslint --cache --fix", "git add"]
+        "*.js": [
+            "eslint --cache --fix",
+            "git add"
+        ]
     },
     "engines": {
         "node": ">= 6.10.0"
