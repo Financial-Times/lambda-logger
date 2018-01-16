@@ -1,6 +1,6 @@
 {
     "name": "@financial-times/lambda-logger",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Logger used by the lambda team. Logs in JSON format using pino",
     "main": "dist/@financial-times/lambda-logger.js",
     "browser": "dist/@financial-times/lambda-logger.umd.js",
