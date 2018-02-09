@@ -34,7 +34,7 @@
     },
     "homepage": "https://github.com/Financial-Times/lambda-logger#readme",
     "dependencies": {
-        "pino": "~4.10.3"
+        "pino": "~4.10.4"
     },
     "devDependencies": {
         "@financial-times/eslint-config-de-tooling": "^2.0.3",
