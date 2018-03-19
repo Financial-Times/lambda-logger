@@ -34,7 +34,7 @@
     },
     "homepage": "https://github.com/Financial-Times/lambda-logger#readme",
     "dependencies": {
-        "pino": "~4.10.4"
+        "pino": "~4.14.0"
     },
     "devDependencies": {
         "@financial-times/eslint-config-de-tooling": "^2.0.3",
@@ -42,15 +42,15 @@
         "babel-jest": "^22.0.4",
         "babel-preset-env": "^1.6.1",
         "coveralls": "^3.0.0",
-        "eslint": "^4.14.0",
+        "eslint": "^4.19.0",
         "eslint-config-prettier": "^2.9.0",
-        "eslint-plugin-import": "^2.8.0",
-        "eslint-plugin-jest": "^21.5.0",
-        "eslint-plugin-prettier": "^2.4.0",
+        "eslint-plugin-import": "^2.9.0",
+        "eslint-plugin-jest": "^21.15.0",
+        "eslint-plugin-prettier": "^2.6.0",
         "husky": "^0.14.3",
-        "jest": "^22.0.4",
-        "lint-staged": "^6.0.0",
-        "microbundle": "^0.2.4",
-        "prettier": "^1.9.2"
+        "jest": "^22.4.2",
+        "lint-staged": "^7.0.0",
+        "microbundle": "^0.4.4",
+        "prettier": "^1.11.1"
     }
 }
