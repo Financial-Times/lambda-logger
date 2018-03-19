@@ -1,12 +1,11 @@
 {
     "name": "@financial-times/lambda-logger",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Logger used by the lambda team. Logs in JSON format using pino",
     "main": "dist/lambda-logger.js",
     "browser": "dist/lambda-logger.umd.js",
-    "module": "dist/lambda-logger.m.js",
     "scripts": {
-        "build": "microbundle -i index.js -o dist",
+        "build": "microbundle -i index.js -o dist -f cjs,umd",
         "watch": "npm run build -- watch",
         "test": "jest",
         "coverage": "npm test -- --coverage",
