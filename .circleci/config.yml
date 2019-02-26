@@ -12,7 +12,7 @@ references:
     docker:
       - image: circleci/node:8.10.0
 
-  container_config_dubnium: &container_config_carbon
+  container_config_dubnium: &container_config_dubnium
     working_directory: ~/project/lambda-logger
     docker:
       - image: circleci/node:dubnium
