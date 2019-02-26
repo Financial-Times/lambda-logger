@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 references:
 
@@ -10,7 +10,12 @@ references:
   container_config_carbon: &container_config_carbon
     working_directory: ~/project/lambda-logger
     docker:
-      - image: circleci/node:carbon
+      - image: circleci/node:8.10.0
+
+  container_config_dubnium: &container_config_carbon
+    working_directory: ~/project/lambda-logger
+    docker:
+      - image: circleci/node:dubnium
 
   workspace_root: &workspace_root
     ~/project
@@ -85,6 +90,20 @@ jobs:
           name: Run build
           command: npm run build
 
+
+  test_dubnium:
+    <<: *container_config_dubnium
+    steps:
+      - *attach_workspace
+
+      - run:
+          name: Run tests
+          command: npm test
+
+      - run:
+          name: Run build
+          command: npm run build
+
   release:
     <<: *container_config_carbon
     steps:
@@ -97,7 +116,7 @@ jobs:
             npm publish --access public
 
 workflows:
-  version: 2
+  version: 2.1
   build-and-deploy:
     jobs:
       - install:
@@ -116,10 +135,17 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - test_dubnium:
+          requires:
+            - install
+          filters:
+            tags:
+              only: /.*/
       - release:
           requires:
             - test_boron
             - test_carbon
+            - test_dubnium
           filters:
             branches:
               ignore: /.*/
