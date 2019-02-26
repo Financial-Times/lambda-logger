@@ -2,11 +2,6 @@ version: 2.1
 
 references:
 
-  container_config_boron: &container_config_boron
-    working_directory: ~/project/lambda-logger
-    docker:
-      - image: circleci/node:6.10.3
-
   container_config_carbon: &container_config_carbon
     working_directory: ~/project/lambda-logger
     docker:
@@ -58,8 +53,8 @@ jobs:
       - *cache_node_modules
       - *persist_workspace
 
-  test_boron:
-    <<: *container_config_boron
+  test_carbon:
+    <<: *container_config_carbon
     steps:
       - *attach_workspace
 
@@ -76,20 +71,6 @@ jobs:
           command: make build
 
       - *persist_workspace
-
-  test_carbon:
-    <<: *container_config_carbon
-    steps:
-      - *attach_workspace
-
-      - run:
-          name: Run tests
-          command: npm test
-
-      - run:
-          name: Run build
-          command: make build
-
 
   test_dubnium:
     <<: *container_config_dubnium
@@ -123,12 +104,6 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - test_boron:
-          requires:
-            - install
-          filters:
-            tags:
-              only: /.*/
       - test_carbon:
           requires:
             - install
@@ -143,7 +118,6 @@ workflows:
               only: /.*/
       - release:
           requires:
-            - test_boron
             - test_carbon
             - test_dubnium
           filters:

@@ -9,12 +9,12 @@
         "test": "make test"
     },
     "engines": {
-        "node": ">= 6.10.0"
+        "node": ">= 8.10.0"
     },
     "rel-engage": {
-      "eslint": {
-        "esModules": true
-      }
+        "eslint": {
+            "esModules": true
+        }
     },
     "repository": {
         "type": "git",
