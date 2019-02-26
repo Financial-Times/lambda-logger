@@ -27,7 +27,8 @@
     },
     "homepage": "https://github.com/Financial-Times/lambda-logger#readme",
     "dependencies": {
-        "pino": "~4.14.0"
+        "pino": "^5.11.1",
+        "pino-pretty": "^2.5.0"
     },
     "devDependencies": {
         "@financial-times/rel-engage": "^7.0.0",
