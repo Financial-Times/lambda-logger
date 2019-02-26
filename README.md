@@ -14,6 +14,7 @@ The logger's API is identical to that of pino with the following exceptions:
 
 -   The property `sourcetype: _json` is added to logs in production for Splunk compatibility.
 -   Lambda related environment variables are added by default:
+-   -   `AWS_REGION`
     -   `AWS_EXECUTION_ENV`,
     -   `AWS_LAMBDA_FUNCTION_NAME`,
     -   `AWS_LAMBDA_FUNCTION_MEMORY_SIZE`,
