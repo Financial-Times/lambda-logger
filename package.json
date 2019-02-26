@@ -4,23 +4,17 @@
     "description": "Logger used by the lambda team. Logs in JSON format using pino",
     "main": "dist/lambda-logger.js",
     "browser": "dist/lambda-logger.umd.js",
+    "module": "dist/lambda-logger.mjs",
     "scripts": {
-        "build": "microbundle -i index.js -o dist -f cjs,umd",
-        "watch": "npm run build -- watch",
-        "test": "jest",
-        "coverage": "npm test -- --coverage",
-        "coverage:submit": "cat ./coverage/lcov.info | coveralls",
-        "lint": "eslint --cache --fix .",
-        "precommit": "lint-staged"
-    },
-    "lint-staged": {
-        "*.js": [
-            "eslint --cache --fix",
-            "git add"
-        ]
+        "test": "make test"
     },
     "engines": {
         "node": ">= 6.10.0"
+    },
+    "rel-engage": {
+      "eslint": {
+        "esModules": true
+      }
     },
     "repository": {
         "type": "git",
@@ -36,20 +30,12 @@
         "pino": "~4.14.0"
     },
     "devDependencies": {
-        "@financial-times/eslint-config-de-tooling": "^2.0.3",
-        "babel-core": "^6.26.0",
-        "babel-jest": "^22.0.4",
-        "babel-preset-env": "^1.6.1",
-        "coveralls": "^3.0.0",
-        "eslint": "^4.19.0",
-        "eslint-config-prettier": "^2.9.0",
-        "eslint-plugin-import": "^2.9.0",
-        "eslint-plugin-jest": "^21.15.0",
-        "eslint-plugin-prettier": "^2.6.0",
-        "husky": "^0.14.3",
-        "jest": "^22.4.2",
-        "lint-staged": "^7.0.0",
-        "microbundle": "^0.4.4",
-        "prettier": "^1.11.1"
+        "@financial-times/rel-engage": "^7.0.0",
+        "babel-core": "^6.26.3",
+        "babel-jest": "^24.1.0",
+        "babel-preset-env": "^1.7.0",
+        "coveralls": "^3.0.3",
+        "jest": "^24.1.0",
+        "microbundle": "^0.10.1"
     }
 }

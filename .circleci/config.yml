@@ -65,15 +65,15 @@ jobs:
 
       - run:
           name: Run linter
-          command: npm run lint
+          command: make lint
 
       - run:
           name: Run tests
-          command: npm run coverage && npm run coverage:submit
+          command: make coverage && make coverage-submit
 
       - run:
           name: Run build
-          command: npm run build
+          command: make build
 
       - *persist_workspace
 
@@ -88,7 +88,7 @@ jobs:
 
       - run:
           name: Run build
-          command: npm run build
+          command: make build
 
 
   test_dubnium:
@@ -102,7 +102,7 @@ jobs:
 
       - run:
           name: Run build
-          command: npm run build
+          command: make build
 
   release:
     <<: *container_config_carbon
