@@ -64,8 +64,8 @@ jobs:
       - *attach_workspace
 
       - run:
-          name: Run linter
-          command: make lint
+          name: Run verification
+          command: make verify -j 4
 
       - run:
           name: Run tests
