@@ -16,12 +16,12 @@ const logger = require('@financial-times/lambda-logger');
 logger.info({ importantField: 'some-field' }, 'Logging a thing');
 ```
 
-
 ### Build exports
 
-This module exports both 
-* a commonjs build (the `main` field in `package.json`)
-* an ESM (ecmascript module) build (the `module` field in `package.json`)
+This module exports both
+
+-   a commonjs build (the `main` field in `package.json`)
+-   an ESM (ecmascript module) build (the `module` field in `package.json`)
 
 If you're using commonjs and webpack, say with [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) it will try to load the ESM build out of the box. This exports a `default` export, and as such won't work if using commonjs.
 
