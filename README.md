@@ -8,6 +8,43 @@ This does make `process.stdout.write` a blocking function (`process.stdout._hand
 
 [![CircleCI](https://circleci.com/gh/Financial-Times/lambda-logger.svg?style=svg&circle-token=95d28799bf7519d6c9628cb0cdb053f08ff9ff30)](https://circleci.com/gh/Financial-Times/lambda-logger) [![Coverage Status](https://coveralls.io/repos/github/Financial-Times/lambda-logger/badge.svg?branch=master)](https://coveralls.io/github/Financial-Times/lambda-logger?branch=master)
 
+## Usage
+
+```js
+const logger = require('@financial-times/lambda-logger');
+
+logger.info({ importantField: 'some-field' }, 'Logging a thing');
+```
+
+
+### Build exports
+
+This module exports both 
+* a commonjs build (the `main` field in `package.json`)
+* an ESM (ecmascript module) build (the `module` field in `package.json`)
+
+If you're using commonjs and webpack, say with [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) it will try to load the ESM build out of the box. This exports a `default` export, and as such won't work if using commonjs.
+
+The solutions to this problem are:
+
+1. Use `import/export` syntax locally and ensure your local tooling uses the ESM build, e.g. by using the [esm](https://www.npmjs.com/package/esm) module.
+2. Setup a webpack alias to the commonjs build:
+
+```js
+// webpack.config.js
+
+module.exports = {
+    ...
+	resolve: {
+		alias: {
+			// use commonjs export of lambda-logger to avoid having to use import/export syntax locally
+			'@financial-times/lambda-logger':
+				'@financial-times/lambda-logger/dist/lambda-logger.js',
+		},
+	},
+};
+```
+
 ## API
 
 The logger's API is identical to that of pino with the following exceptions:
