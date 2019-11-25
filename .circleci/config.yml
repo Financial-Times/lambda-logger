@@ -98,9 +98,7 @@ jobs:
       - *attach_workspace
 
       - deploy:
-          command: |
-            npm version --no-git-tag-version $CIRCLE_TAG
-            npm publish --access public
+          command: make npm-publish
 
 workflows:
   version: 2.1
