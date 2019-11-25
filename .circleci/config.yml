@@ -98,7 +98,10 @@ jobs:
       - *attach_workspace
 
       - deploy:
-          command: make npm-publish
+          name: npm publish
+          command: |
+            echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
+            make npm-publish
 
 workflows:
   version: 2.1
