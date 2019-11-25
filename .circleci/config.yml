@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  ft-snyk-orb: financial-times/ft-snyk-orb@0
+
 references:
 
   container_config_carbon: &container_config_carbon
@@ -116,6 +119,12 @@ workflows:
           filters:
             tags:
               only: /.*/
+      #Scan package.json for vulnerable dependencies while developing
+      - ft-snyk-orb/scan-js-packages:
+          context: rel-eng-creds
+          requires:
+            - install
+          filters: *only_version_tags
       - release:
           context: rel-eng-creds
           requires:
@@ -126,6 +135,16 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
+    #Scan and monitor vulnerabilities once in production
+      - ft-snyk-orb/scan-and-monitor-js-packages:
+          name: snyk-scan-and-monitor
+          context: rel-eng-creds
+          requires:
+            - release
+          filters:
+            <<: *only_version_tags
+            branches:
+              ignore: /.*/
 
 experimental:
   notify:
