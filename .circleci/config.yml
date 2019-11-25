@@ -44,7 +44,7 @@ references:
 
   only_version_tags: &only_version_tags
     tags:
-      only: /^v[0-9]+$/
+      only: /^v[0-9]+\.[0-9]+\.[0-9]+(-(alpha|beta)\.\d+)?$/
 
 jobs:
   install:
