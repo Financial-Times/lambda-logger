@@ -99,7 +99,7 @@ jobs:
 
       - deploy:
           command: |
-            npm version --no-git-tag-version $(CIRCLE_TAG)
+            npm version --no-git-tag-version $CIRCLE_TAG
             npm publish --access public
 
 workflows:
