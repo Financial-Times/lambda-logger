@@ -9,7 +9,7 @@
         "test": "make test"
     },
     "engines": {
-        "node": ">= 12"
+        "node": "8.17.0"
     },
     "rel-engage": {
         "eslint": {
