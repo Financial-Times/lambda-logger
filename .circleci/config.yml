@@ -4,19 +4,17 @@ orbs:
   ft-snyk-orb: financial-times/ft-snyk-orb@0
 
 references:
-
   container_config_carbon: &container_config_carbon
     working_directory: ~/project/lambda-logger
     docker:
-      - image: circleci/node:8.10.0
+      - image: circleci/node:14
 
   container_config_dubnium: &container_config_dubnium
     working_directory: ~/project/lambda-logger
     docker:
       - image: circleci/node:dubnium
 
-  workspace_root: &workspace_root
-    ~/project
+  workspace_root: &workspace_root ~/project
 
   persist_workspace: &persist_workspace
     persist_to_workspace:
@@ -28,8 +26,7 @@ references:
     attach_workspace:
       at: *workspace_root
 
-  npm_cache_key: &npm_cache_key
-    v1-dependency-npm-{{ checksum "package-lock.json" }}
+  npm_cache_key: &npm_cache_key v1-dependency-npm-{{ checksum "package-lock.json" }}
 
   restore_node_modules: &restore_node_modules
     restore_cache:
@@ -140,7 +137,7 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
-    #Scan and monitor vulnerabilities once in production
+      #Scan and monitor vulnerabilities once in production
       - ft-snyk-orb/scan-and-monitor-js-packages:
           name: snyk-scan-and-monitor
           context: rel-eng-creds
