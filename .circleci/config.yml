@@ -26,7 +26,7 @@ references:
     attach_workspace:
       at: *workspace_root
 
-  npm_cache_key: &npm_cache_key v2-dependency-npm-{{ checksum "package-lock.json" }}
+  npm_cache_key: &npm_cache_key v5-dependency-npm-{{ checksum "package-lock.json" }}
 
   restore_node_modules: &restore_node_modules
     restore_cache:
