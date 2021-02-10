@@ -4,10 +4,10 @@ orbs:
   ft-snyk-orb: financial-times/ft-snyk-orb@0
 
 references:
-  container_config_carbon: &container_config_carbon
+  container_config_fermium: &container_config_fermium
     working_directory: ~/project/lambda-logger
     docker:
-      - image: circleci/node:14
+      - image: circleci/node:fermium # codename for nodejs active LTS v14
 
   container_config_dubnium: &container_config_dubnium
     working_directory: ~/project/lambda-logger
@@ -45,7 +45,7 @@ references:
 
 jobs:
   install:
-    <<: *container_config_carbon
+    <<: *container_config_fermium
     steps:
       - checkout
       - *restore_node_modules
@@ -57,8 +57,8 @@ jobs:
       - *cache_node_modules
       - *persist_workspace
 
-  test_carbon:
-    <<: *container_config_carbon
+  test_fermium:
+    <<: *container_config_fermium
     steps:
       - *attach_workspace
 
@@ -90,7 +90,7 @@ jobs:
           command: make build
 
   release:
-    <<: *container_config_carbon
+    <<: *container_config_fermium
     steps:
       - *attach_workspace
 
@@ -108,7 +108,7 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - test_carbon:
+      - test_fermium:
           requires:
             - install
           context: rel-eng-creds
@@ -130,7 +130,7 @@ workflows:
       - release:
           context: rel-eng-creds
           requires:
-            - test_carbon
+            - test_fermium
             - test_dubnium
           filters:
             branches:
