@@ -35,8 +35,8 @@
         "babel-core": "^6.26.3",
         "babel-jest": "^24.1.0",
         "babel-preset-env": "^1.7.0",
-        "coveralls": "^3.0.3",
+        "coveralls": "^3.1.0",
         "jest": "^24.1.0",
-        "microbundle": "^0.10.1"
+        "microbundle": "^0.13.0"
     }
 }
