@@ -96,7 +96,7 @@ jobs:
 
       - deploy:
           name: npm publish
-          description: 'Authenticate so that we can publish lambda-logger to npm. Overwrite the default npm registry URL with the access token appended to it'
+          description: 'Overwrite the default npm registry URL with the access token appended to it. Once authenticated, publish the lambda-logger to the npm registry'
           command: |
             echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
             make npm-publish
