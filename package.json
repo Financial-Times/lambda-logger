@@ -9,7 +9,7 @@
         "test": "make test"
     },
     "engines": {
-        "node": ">= 8.10.0"
+        "node": "14.x"
     },
     "rel-engage": {
         "eslint": {
@@ -31,12 +31,12 @@
         "pino-pretty": "^2.5.0"
     },
     "devDependencies": {
-        "@financial-times/rel-engage": "^7.0.0",
+        "@financial-times/rel-engage": "^8.0.3",
         "babel-core": "^6.26.3",
         "babel-jest": "^24.1.0",
         "babel-preset-env": "^1.7.0",
-        "coveralls": "^3.0.3",
+        "coveralls": "^3.1.0",
         "jest": "^24.1.0",
-        "microbundle": "^0.10.1"
+        "microbundle": "^0.13.0"
     }
 }

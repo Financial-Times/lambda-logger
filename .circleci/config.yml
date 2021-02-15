@@ -4,19 +4,17 @@ orbs:
   ft-snyk-orb: financial-times/ft-snyk-orb@0
 
 references:
-
-  container_config_carbon: &container_config_carbon
+  container_config_node14: &container_config_node14
     working_directory: ~/project/lambda-logger
     docker:
-      - image: circleci/node:8.10.0
+      - image: circleci/node:14
 
-  container_config_dubnium: &container_config_dubnium
+  container_config_node12: &container_config_node12
     working_directory: ~/project/lambda-logger
     docker:
-      - image: circleci/node:dubnium
+      - image: circleci/node:12
 
-  workspace_root: &workspace_root
-    ~/project
+  workspace_root: &workspace_root ~/project
 
   persist_workspace: &persist_workspace
     persist_to_workspace:
@@ -28,8 +26,7 @@ references:
     attach_workspace:
       at: *workspace_root
 
-  npm_cache_key: &npm_cache_key
-    v1-dependency-npm-{{ checksum "package-lock.json" }}
+  npm_cache_key: &npm_cache_key v5-dependency-npm-{{ checksum "package-lock.json" }}
 
   restore_node_modules: &restore_node_modules
     restore_cache:
@@ -48,7 +45,7 @@ references:
 
 jobs:
   install:
-    <<: *container_config_carbon
+    <<: *container_config_node14
     steps:
       - checkout
       - *restore_node_modules
@@ -60,8 +57,8 @@ jobs:
       - *cache_node_modules
       - *persist_workspace
 
-  test_carbon:
-    <<: *container_config_carbon
+  test_node14:
+    <<: *container_config_node14
     steps:
       - *attach_workspace
 
@@ -79,8 +76,8 @@ jobs:
 
       - *persist_workspace
 
-  test_dubnium:
-    <<: *container_config_dubnium
+  test_node12:
+    <<: *container_config_node12
     steps:
       - *attach_workspace
 
@@ -93,12 +90,13 @@ jobs:
           command: make build
 
   release:
-    <<: *container_config_carbon
+    <<: *container_config_node14
     steps:
       - *attach_workspace
 
       - deploy:
           name: npm publish
+          description: 'Overwrite the default npm registry URL with the access token appended to it. Once authenticated, publish the lambda-logger to the npm registry'
           command: |
             echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
             make npm-publish
@@ -111,14 +109,14 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - test_carbon:
+      - test_node14:
           requires:
             - install
           context: rel-eng-creds
           filters:
             tags:
               only: /.*/
-      - test_dubnium:
+      - test_node12:
           requires:
             - install
           filters:
@@ -133,14 +131,14 @@ workflows:
       - release:
           context: rel-eng-creds
           requires:
-            - test_carbon
-            - test_dubnium
+            - test_node14
+            - test_node12
           filters:
             branches:
               ignore: /.*/
             tags:
               only: /.*/
-    #Scan and monitor vulnerabilities once in production
+      #Scan and monitor vulnerabilities once in production
       - ft-snyk-orb/scan-and-monitor-js-packages:
           name: snyk-scan-and-monitor
           context: rel-eng-creds
