@@ -153,4 +153,4 @@ experimental:
   notify:
     branches:
       only:
-        - master
+        - main
