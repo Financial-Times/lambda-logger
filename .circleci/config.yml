@@ -129,7 +129,7 @@ workflows:
             - install
           filters: *only_version_tags
       - release:
-          context: rel-eng-creds
+          context: npm-publish-token
           requires:
             - test_node14
             - test_node12
