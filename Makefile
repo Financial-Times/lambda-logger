@@ -24,12 +24,12 @@ install:
 # ---------------------------
 
 build:
-	microbundle -i index.js -o dist
+	npx microbundle -i index.js -o dist
 watch:
-	microbundle -i index.js -o dist --watch
+	npx microbundle -i index.js -o dist --watch
 test:
-	jest
+	npx jest
 coverage:
-	jest --coverage
+	npx jest --coverage
 coverage-submit:
 	cat ./coverage/lcov.info | coveralls
