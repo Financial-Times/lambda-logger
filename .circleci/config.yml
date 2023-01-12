@@ -52,16 +52,16 @@ jobs:
       - *cache_node_modules
       - *persist_workspace
 
-    build:
-      <<: *container_config
-      steps:
-        - *attach_workspace
+  build:
+    <<: *container_config
+    steps:
+      - *attach_workspace
 
-        - run:
-            name: Run build
-            command: make build
+      - run:
+          name: Run build
+          command: make build
 
-        - *persist_workspace
+      - *persist_workspace
 
   test:
     <<: *container_config
