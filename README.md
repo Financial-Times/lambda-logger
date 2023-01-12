@@ -6,7 +6,7 @@ This was created to provide a simple logger, compatible with lambda, which outpu
 
 This does make `process.stdout.write` a blocking function (`process.stdout._handle.setBlocking(true);`), as AWS Lambda previously streamed to an output which was synchronous, but has since changed to asynchronous behaviour, leading to lost logs.
 
-[![CircleCI](https://circleci.com/gh/Financial-Times/lambda-logger.svg?style=svg&circle-token=95d28799bf7519d6c9628cb0cdb053f08ff9ff30)](https://circleci.com/gh/Financial-Times/lambda-logger) [![Coverage Status](https://coveralls.io/repos/github/Financial-Times/lambda-logger/badge.svg?branch=master)](https://coveralls.io/github/Financial-Times/lambda-logger?branch=master)
+[![CircleCI](https://circleci.com/gh/Financial-Times/lambda-logger.svg?style=svg&circle-token=95d28799bf7519d6c9628cb0cdb053f08ff9ff30)](https://circleci.com/gh/Financial-Times/lambda-logger)
 
 ## Usage
 

@@ -29,7 +29,3 @@ watch:
 	npx microbundle -i index.js -o dist --watch
 test:
 	npx jest
-coverage:
-	npx jest --coverage
-coverage-submit:
-	cat ./coverage/lcov.info | coveralls
