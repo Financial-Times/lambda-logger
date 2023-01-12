@@ -119,8 +119,7 @@ workflows:
       - release:
           context: npm-publish-token
           requires:
-            - test_node14
-            - test_node12
+            - test
           filters:
             branches:
               ignore: /.*/
