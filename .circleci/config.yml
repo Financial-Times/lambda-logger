@@ -4,15 +4,10 @@ orbs:
   ft-snyk-orb: financial-times/ft-snyk-orb@0
 
 references:
-  container_config_node14: &container_config_node14
+  container_config: &container_config
     working_directory: ~/project/lambda-logger
     docker:
       - image: cimg/node:14.18.3
-
-  container_config_node12: &container_config_node12
-    working_directory: ~/project/lambda-logger
-    docker:
-      - image: cimg/node:12.22.9
 
   workspace_root: &workspace_root ~/project
 
@@ -45,7 +40,7 @@ references:
 
 jobs:
   install:
-    <<: *container_config_node14
+    <<: *container_config
     steps:
       - checkout
       - *restore_node_modules
@@ -57,8 +52,19 @@ jobs:
       - *cache_node_modules
       - *persist_workspace
 
-  test_node14:
-    <<: *container_config_node14
+    build:
+      <<: *container_config
+      steps:
+        - *attach_workspace
+
+        - run:
+            name: Run build
+            command: make build
+
+        - *persist_workspace
+
+  test:
+    <<: *container_config
     steps:
       - *attach_workspace
 
@@ -68,29 +74,10 @@ jobs:
 
       - run:
           name: Run tests
-          command: make coverage && make coverage-submit
-
-      - run:
-          name: Run build
-          command: make build
-
-      - *persist_workspace
-
-  test_node12:
-    <<: *container_config_node12
-    steps:
-      - *attach_workspace
-
-      - run:
-          name: Run tests
           command: npm test
 
-      - run:
-          name: Run build
-          command: make build
-
   release:
-    <<: *container_config_node14
+    <<: *container_config
     steps:
       - *attach_workspace
 
@@ -109,16 +96,17 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - test_node14:
+      - build:
           requires:
             - install
-          context: rel-eng-creds
           filters:
             tags:
               only: /.*/
-      - test_node12:
+      - test:
+          context: rel-eng-creds
           requires:
             - install
+            - build
           filters:
             tags:
               only: /.*/
