@@ -69,7 +69,7 @@ Pino adds the following properties to logs by default:
 
 ## Configuration
 
--   `NODE_ENV` - pretty printing is enabled when `NODE_ENV !== 'production'`.
+-   `NODE_ENV` - pretty printing is enabled when value of `NODE_ENV` is not same as `p`, `prod` or `production`.
 -   `CONSOLE_LOG_LEVEL` - determines the level to log at (pinto `level` option). Defaults to `info`.
 -   `SYSTEM_CODE` - adds the `systemCode` property to every log.
 -   `ENVIRONMENT|STAGE` - adds the `environment` property to every log. `STAGE` is used as a fallback due to it's default definition in the [serverless](https://serverless.com) framework.
