@@ -1,4 +1,4 @@
-# This library is deprecated please use [DotCom logger](https://github.com/Financial-Times/dotcom-reliability-kit) instead
+# ⚠️ This library is deprecated please use [DotCom logger](https://github.com/Financial-Times/dotcom-reliability-kit) instead ⚠️
 
 # lambda-logger
 
